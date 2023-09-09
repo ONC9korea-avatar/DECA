@@ -1,0 +1,6 @@
+[submodule "third_parties/face-parsing.PyTorch"]
+	path = third_parties/face-parsing.PyTorch
+	url = git@github.com:zllrunning/face-parsing.PyTorch.git
+[submodule "third_parties/align-heads/obj_utils"]
+	path = third_parties/align-heads/obj_utils
+	url = git@github.com:ONC9korea-avatar/obj_utils.git
