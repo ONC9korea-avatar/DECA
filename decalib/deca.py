@@ -243,7 +243,7 @@ class DECA(nn.Module):
                 else:
                     uv_texture_gt = uv_texture[:,:3,:,:]
             else:
-                uv_texture_gt = uv_gt[:,:3,:,:]*self.uv_face_eye_mask + (torch.ones_like(uv_gt[:,:3,:,:])*(1-self.uv_face_eye_mask)*0.7)
+                uv_texture_gt = uv_gt[:,:3,:,:]*self.uv_face_eye_mask #+ (torch.ones_like(uv_gt[:,:3,:,:])*(1-self.uv_face_eye_mask)*0.7)
             
             opdict['uv_texture_gt'] = uv_texture_gt
             visdict = {
