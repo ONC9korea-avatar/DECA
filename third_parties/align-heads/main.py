@@ -1,5 +1,6 @@
 import trimesh
 import numpy as np
+import cv2 as cv
 
 import os, sys
 
@@ -89,7 +90,7 @@ def main(path_body, path_head, save_path):
 
 
         mesh_merged = trimesh.util.concatenate([mesh_body, mesh_head])
-        mesh_merged.visual.uv[:6890] = [0.25, 1.0]
+        mesh_merged.visual.uv[:mesh_body.vertices.shape[0]] = [0.75, 0.5]
         # mesh_merged = trimesh.boolean.union([mesh_body, mesh_head], 'blender')
         # # remove_open_faces(mesh_merged)
         # # trimesh.repair.fill_holes(mesh_merged)
@@ -97,7 +98,17 @@ def main(path_body, path_head, save_path):
         os.makedirs(os.path.join(save_path, subject), exist_ok=True)
         obj_path = os.path.join(save_path, subject, subject+'_result.obj')
         mesh_merged.export(obj_path)
-    
+
+
+        # post-process material
+        img = cv.imread(os.path.join(save_path, subject, 'material_0.png'))
+        h, w, _ = img.shape
+
+        body_color = img[h-1, w//4, :]
+        img[:, w//2:] = body_color
+
+        cv.imwrite(os.path.join(save_path, subject, 'material_0.png'), img)
+
         # with open(obj_path) as f:
         #     data = f.read().splitlines()
     
